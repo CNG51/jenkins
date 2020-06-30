@@ -21,7 +21,7 @@ pipeline {
                 checkout scm
                 echo 'Installing pip packages.......'
                 sh 'cd $WORKSPACE'
-                sh 'sudo pip install --ignore-installed -r $WORKSPACE/athena_qa-master/main/requirements.txt'
+                sh 'sudo pip install --ignore-installed -r $WORKSPACE/jenkins/main/requirements.txt'
                 sh 'cd ${ROOT_TEST_DIR}'
             }
         }
