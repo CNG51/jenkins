@@ -1,0 +1,62 @@
+pipeline {
+    agent{
+        label 'portal-ft'
+    }
+    triggers{ cron('H H/12 * * *') }
+    environment {
+    SERVICE="athena"
+    ROOT_TEST_DIR="$WORKSPACE/jenkins"
+    FILES = 'entitelement,hostapp,identity,news'
+  }
+    parameters {
+            choice(
+                name: 'CSP_HOST',
+                choices: ['stage','1','2','3','4','5','6'],
+                description: "Choose Host CSP!")
+    }
+
+   stages {
+        stage('Install dependencies ') {
+            steps {
+                checkout scm
+                echo 'Installing pip packages.......'
+                sh 'cd $WORKSPACE'
+                sh 'sudo pip install --ignore-installed -r $WORKSPACE/athena_qa-master/main/requirements.txt'
+                sh 'cd ${ROOT_TEST_DIR}'
+            }
+        }
+        stage('pipeline'){
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+            }
+            steps{
+                script {
+                    doDynamicParallelSteps()
+                        }
+                 }
+             }
+   }
+}
+
+
+def doDynamicParallelSteps(){
+  def some = FILES.tokenize(',')
+  def tests = [:]
+  for (d in some) {
+    def f = d
+    echo "================================================================================"
+
+    tests["${f}"] ={
+        stage("${f}---> ${CSP_HOST}") {
+        echo "Running : ${f} with ${CSP_HOST}"
+        echo "------------------------------------------------------------------------"
+        echo " [START] Execute UI TEST scripts for SERVICE::${f}"
+        echo "------------------------------------------------------------------------"
+        sh 'cd ${ROOT_TEST_DIR}'
+        sh "pytest $WORKSPACE/main/tests/athena/bvt/${f} -m "smoke and identity" --env=${CSP_HOST}
+            }
+
+        }
+      }
+  parallel tests
+}
