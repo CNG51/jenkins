@@ -31,7 +31,7 @@ pipeline {
               echo " [START] Execute UI TEST scripts for SERVICE::${f}"
               echo "------------------------------------------------------------------------"
               sh 'cd ${ROOT_TEST_DIR}'
-              sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}''
+              sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
         stage('hostapp'){
@@ -41,7 +41,7 @@ pipeline {
               echo " [START] Execute UI TEST scripts for SERVICE::${f}"
               echo "------------------------------------------------------------------------"
               sh 'cd ${ROOT_TEST_DIR}'
-              sh 'pytest $WORKSPACE/main/tests/athena/bvt/hostapp -m "smoke and identity" --env=${CSP_HOST}''
+              sh 'pytest $WORKSPACE/main/tests/athena/bvt/hostapp -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
         stage('identity'){
@@ -51,7 +51,7 @@ pipeline {
               echo " [START] Execute UI TEST scripts for SERVICE::${f}"
               echo "------------------------------------------------------------------------"
               sh 'cd ${ROOT_TEST_DIR}'
-              sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}''
+              sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
         stage('news'){
@@ -61,7 +61,7 @@ pipeline {
               echo " [START] Execute UI TEST scripts for SERVICE::${f}"
               echo "------------------------------------------------------------------------"
               sh 'cd ${ROOT_TEST_DIR}'
-              sh 'pytest $WORKSPACE/main/tests/athena/bvt/news -m "smoke and identity" --env=${CSP_HOST}''
+              sh 'pytest $WORKSPACE/main/tests/athena/bvt/news -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
 
