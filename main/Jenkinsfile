@@ -53,7 +53,7 @@ def doDynamicParallelSteps(){
         echo " [START] Execute UI TEST scripts for SERVICE::${f}"
         echo "------------------------------------------------------------------------"
         sh 'cd ${ROOT_TEST_DIR}'
-        sh "pytest $WORKSPACE/main/tests/athena/bvt/${f} -m "smoke and identity" --env=${CSP_HOST}
+        sh 'pytest $WORKSPACE/main/tests/athena/bvt/${f} -m "smoke and identity" --env=${CSP_HOST}'
             }
 
         }
