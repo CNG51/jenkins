@@ -25,6 +25,7 @@ pipeline {
             }
         }
         stage('identity'){
+            steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               echo "Running : ${f} with ${CSP_HOST}"
               echo "------------------------------------------------------------------------"
@@ -34,7 +35,9 @@ pipeline {
               sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
+        }
         stage('hostapp'){
+            steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               echo "Running : ${f} with ${CSP_HOST}"
               echo "------------------------------------------------------------------------"
@@ -44,7 +47,9 @@ pipeline {
               sh 'pytest $WORKSPACE/main/tests/athena/bvt/hostapp -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
+        }
         stage('identity'){
+            steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               echo "Running : ${f} with ${CSP_HOST}"
               echo "------------------------------------------------------------------------"
@@ -54,7 +59,9 @@ pipeline {
               sh 'pytest $WORKSPACE/main/tests/athena/bvt/identity -m "smoke and identity" --env=${CSP_HOST}'
         }
         }
+        }
         stage('news'){
+            steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               echo "Running : ${f} with ${CSP_HOST}"
               echo "------------------------------------------------------------------------"
@@ -62,6 +69,7 @@ pipeline {
               echo "------------------------------------------------------------------------"
               sh 'cd ${ROOT_TEST_DIR}'
               sh 'pytest $WORKSPACE/main/tests/athena/bvt/news -m "smoke and identity" --env=${CSP_HOST}'
+        }
         }
         }
 
