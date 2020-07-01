@@ -40,7 +40,7 @@ pipeline {
                     color: 'good',
                     tokenCredentialId: 'Adua Slack Token',
                     token: 'O2O7Y3m5AFkgK3CdInL9HYOW',
-                    message: "test-slack-notification-groovy",
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                     username: 'Jenkins-delete job',
                     iconEmoji: ':relaxed:'
                     //"*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
