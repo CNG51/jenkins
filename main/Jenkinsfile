@@ -26,8 +26,8 @@ pipeline {
                     if(CSP_HOST=='stage'){
                         currentBuild.displayName = 'stage.csp.infoblox.com'
                     }
-                    if(CSP_HOST=='1'){
-                        currentBuild.displayName = 'env-1.test.infoblox.com'
+                    else{
+                        currentBuild.displayName = 'env-${CSP_HOST}.test.infoblox.com'
                     }
                 }
             }
