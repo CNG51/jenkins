@@ -27,7 +27,7 @@ pipeline {
                         currentBuild.displayName = 'stage.csp.infoblox.com'
                     }
                     else{
-                        currentBuild.displayName = 'env-'CSP_HOST'.test.infoblox.com'
+                        currentBuild.displayName = "env-${CSP_HOST}.test.infoblox.com"
                     }
                 }
             }
