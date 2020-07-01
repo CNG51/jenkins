@@ -22,6 +22,14 @@ pipeline {
                 sh 'cd $WORKSPACE'
                 sh 'sudo pip install --ignore-installed -r $WORKSPACE/athena_qa-master/main/requirements.txt'
                 sh 'cd ${ROOT_TEST_DIR}'
+                script{
+                    if(CSP_HOST=='stage'){
+                        currentBuild.displayName = 'stage.csp.infoblox.com'
+                    }
+                    if(CSP_HOST=='1'){
+                        currentBuild.displayName = 'env-1.test.infoblox.com'
+                    }
+                }
             }
         }
         stage('identity'){
