@@ -33,6 +33,21 @@ pipeline {
                 }
             }
         }
+        stages {
+        stage('Slack Message') {
+            steps {
+                slackSend channel: '#athena-qa-jenkins-notify',
+                    teamDomain: 'infoblox-engineering.slack.com',
+                    color: 'good',
+                    tokenCredentialId: 'Adua Slack Token',
+                    token: 'O2O7Y3m5AFkgK3CdInL9HYOW',
+                    message: "test-slack-notification-groovy",
+                    username: 'Jenkins-delete job',
+                    iconEmoji: ':relaxed:'
+                    //"*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+            
+            }
+        }
         stage('pipeline'){
             options {
                 timeout(time: 10, unit: 'MINUTES')
@@ -61,7 +76,7 @@ def doDynamicParallelSteps(){
         echo " [START] Execute UI TEST scripts for SERVICE::${f}"
         echo "------------------------------------------------------------------------"
         sh 'cd ${ROOT_TEST_DIR}'
-        sh "pytest $WORKSPACE/main/tests/athena/bvt/${f} -m "smoke and identity" --env=${CSP_HOST}
+        sh 'pytest $WORKSPACE/main/tests/athena/bvt/${f} -m "smoke and identity" --env=${CSP_HOST}'
             }
 
         }
