@@ -10,7 +10,7 @@ pipeline {
     parameters {
             choice(
                 name: 'CSP_HOST',
-                choices: ['stage','1','2','3','4','5','6'],
+                choices: ['stage','1','2a','3','4','5','6'],
                 description: "Choose Host CSP!")
     }
 
@@ -27,7 +27,7 @@ pipeline {
                         currentBuild.displayName = 'stage.csp.infoblox.com'
                     }
                     else{
-                        currentBuild.displayName = 'env-${CSP_HOST}.test.infoblox.com'
+                        currentBuild.displayName = 'env-'CSP_HOST'.test.infoblox.com'
                     }
                 }
             }
