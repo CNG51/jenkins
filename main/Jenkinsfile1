@@ -33,7 +33,6 @@ pipeline {
                 }
             }
         }
-        stages {
         stage('Slack Message') {
             steps {
                 slackSend channel: '#athena-qa-jenkins-notify',
